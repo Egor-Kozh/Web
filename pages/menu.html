@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        a:link	{color:blue; text-decoration:none}
+        a:visited {color:pink; text-decoration:none}
+        a:hover   {color:red; text-decoration:underline}
+        a:active  {color:yellow; text-decoration:underline}
+        ul {display: flex; list-style-type: none}
+        li {margin: 10px;}
+        fieldset {width: 300px;}
+    </style>
+
+</head>
+<body>
+    <div>
+        <ul>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="text.html">Text</a></li>
+            <li><a href="img.html">Img</a></li>
+            <li><a href="list.html">List</a></li>
+            <li><a href="table.html">Table</a></li>
+        </ul>
+    </div>
+    <div>
+        <h2>Регистрация на сайт</h2>
+        <form>
+            <fieldset>
+                <legend>Введите данные</legend>
+                <p>
+                    <label for="login">Логин: </label> <p></p>
+                    <input type="text" min="4" max="20" required id="login" name="login" placeholder="ФИО" />
+                </p>
+                <p>
+                    <label for="password">Пароль: </label> <p></p>
+                    <input type="password" min="8" max="30" required id="password" name="password" placeholder="*********" />
+                </p>
+                <p>
+                    <label for="sex">Пол:</label>
+                    <p>
+                        <input type="radio" name="sex">
+                        <label for="male">Мужской</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="sex">
+                        <label for="female">Женский</label>
+                    </p>
+                </p>
+                <p>
+                    <label for="city">Город:</label> <p></p>
+                    <input list="cities" id="city"  name="city" />
+
+                    <datalist id="cities">
+                        <option value="Москва"></option>
+                        <option value="Санкт-Петербург"></option>
+                        <option value="Омск"></option>
+                        <option value="Новосибирск"></option>
+                        <option value="Воронеж"></option>
+                    </datalist>
+                </p>
+                <p>
+                    <label for="email">Электронная почта:</label> <p></p>
+                    <input type="email" name="mail" placeholder="goodnet@mail.ru">
+                </p>
+                <p>
+                    <label for="good">Оцените сайт</label><p></p>
+                    <input type="text" name="good" value="Отлично" readonly>
+                </p>
+                <p>
+                    <button type="submit">Зарегистрироваться</button>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
