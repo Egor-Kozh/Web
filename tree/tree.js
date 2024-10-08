@@ -1,13 +1,14 @@
 class BuildTree {
     constructor(treeNode){
         this.treeNode = treeNode;
+        this.emp_id = "";
     }
 
     buildNode(i = 0, name = "ul0", treeNode = this.treeNode){
         var ul = document.createElement("ul");
         ul.id = `ul${treeNode.id}`;
         var li = document.createElement("li");
-        li.id = `name${i}`
+        li.id = `name${treeNode.id}`
         li.innerHTML = treeNode.name;
         document.getElementById(`${name}`).appendChild(ul);
         document.getElementById(`ul${treeNode.id}`).appendChild(li);
@@ -19,8 +20,9 @@ class BuildTree {
                 document.getElementById(`ul${treeNode.id}`).appendChild(ul);
                 for(let j = 0; j < treeNode.employee.length; j++){
                     var li = document.createElement("li");
-                    li.id = `emp${treeNode.id+j}`
+                    li.id = `emp${treeNode.id + `${j}`}`
                     li.innerHTML = treeNode.employee[j]
+                    li.style.color = "white"
                     document.getElementById(`${treeNode.name}`).appendChild(li);
                 }
                 if(treeNode.childNode){
@@ -59,13 +61,17 @@ class BuildTree {
             li.id = `li_emp${i}`
             li.innerHTML = filter_emp[i];
             li.onclick = () => {
+                if(this.emp_id){
+                    var li = document.getElementById(this.emp_id)
+                    li.style.color = "white"
+                }
                 var inp = document.getElementById("i_search");
                 inp.value = filter_emp[i];
                 var elem = document.getElementById(`u_search_list`);
                 elem.parentNode.removeChild(elem);
                 let properties = this.searchTreeEmployee(this.treeNode, filter_emp[i])
                 console.log(properties)
-                properties.way.push(0)
+                this.buildTree(filter_emp[i], properties)
             };
             document.getElementById(`u_search_list`).appendChild(li);
         }
@@ -100,8 +106,43 @@ class BuildTree {
         }
     }
 
-    buildTree(treeNode = this.treeNode){
-        
+    buildTree(value_search, properties, i = 0, treeNode = this.treeNode){
+        if(document.getElementById(`${treeNode.name}`)){
+            i++
+            if(i == properties.way.length){
+                for(let j = 0; j < treeNode.employee.length; j++){
+                    if(treeNode.employee[j] == value_search){
+                        var v_s = document.getElementById(`emp${treeNode.id + `${j}`}`)
+                        v_s.style.color = "yellow";
+                        this.emp_id = `emp${treeNode.id + `${j}`}`
+                    }
+                }
+            }
+            for(let j = 0; j < treeNode.childNode.length; j++){
+                if(properties.way[i] == treeNode.childNode[j].id){
+                    this.buildTree(value_search, properties, i, treeNode.childNode[j] )
+                }
+            }
+        }
+        else{
+            document.getElementById(`name${treeNode.id}`).click()
+            i++;
+            if(i == properties.way.length){
+                console.log("finish")
+                for(let j = 0; j < treeNode.employee.length; j++){
+                    if(treeNode.employee[j] == value_search){
+                        var v_s = document.getElementById(`emp${treeNode.id + `${j}`}`)
+                        v_s.style.color = "yellow";
+                        this.emp_id = `emp${treeNode.id + `${j}`}`
+                    }
+                }
+            }
+            for(let j = 0; j < treeNode.childNode.length; j++){
+                if(properties.way[i] == treeNode.childNode[j].id){
+                    this.buildTree(value_search, properties, i, treeNode.childNode[j] )
+                }
+            }
+        }
     }
 }
 
