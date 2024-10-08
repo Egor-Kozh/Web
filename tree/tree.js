@@ -1,7 +1,7 @@
 class BuildTree {
     constructor(treeNode){
         this.treeNode = treeNode;
-        this.emp_id = "";
+        this.mark_emp_id = "";
     }
 
     buildNode(i = 0, name = "ul0", treeNode = this.treeNode){
@@ -22,7 +22,6 @@ class BuildTree {
                     var li = document.createElement("li");
                     li.id = `emp${treeNode.id + `${j}`}`
                     li.innerHTML = treeNode.employee[j]
-                    li.style.color = "white"
                     document.getElementById(`${treeNode.name}`).appendChild(li);
                 }
                 if(treeNode.childNode){
@@ -61,8 +60,8 @@ class BuildTree {
             li.id = `li_emp${i}`
             li.innerHTML = filter_emp[i];
             li.onclick = () => {
-                if(document.getElementById(this.emp_id)){
-                    var li = document.getElementById(this.emp_id)
+                if(document.getElementById(this.mark_emp_id)){
+                    var li = document.getElementById(this.mark_emp_id)
                     li.style.color = "white"
                 }
                 var inp = document.getElementById("i_search");
@@ -114,7 +113,7 @@ class BuildTree {
                     if(treeNode.employee[j] == value_search){
                         var v_s = document.getElementById(`emp${treeNode.id + `${j}`}`)
                         v_s.style.color = "yellow";
-                        this.emp_id = `emp${treeNode.id + `${j}`}`
+                        this.mark_emp_id = `emp${treeNode.id + `${j}`}`
                     }
                 }
             }
@@ -128,12 +127,11 @@ class BuildTree {
             document.getElementById(`name${treeNode.id}`).click()
             i++;
             if(i == properties.way.length){
-                console.log("finish")
                 for(let j = 0; j < treeNode.employee.length; j++){
                     if(treeNode.employee[j] == value_search){
                         var v_s = document.getElementById(`emp${treeNode.id + `${j}`}`)
                         v_s.style.color = "yellow";
-                        this.emp_id = `emp${treeNode.id + `${j}`}`
+                        this.mark_emp_id = `emp${treeNode.id + `${j}`}`
                     }
                 }
             }
@@ -174,7 +172,14 @@ let tree1 = {
             id:4,
             name: "Отдел 4",
             employee: ["Бурунов"],
-            childNode: []
+            childNode: [
+                {
+                    id:6,
+                    name: "Отдел 6",
+                    employee: ["Махеев"],
+                    childNode: []
+                }
+            ]
         }
     ]
 }
