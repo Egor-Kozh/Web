@@ -61,7 +61,7 @@ class BuildTree {
             li.id = `li_emp${i}`
             li.innerHTML = filter_emp[i];
             li.onclick = () => {
-                if(this.emp_id){
+                if(document.getElementById(this.emp_id)){
                     var li = document.getElementById(this.emp_id)
                     li.style.color = "white"
                 }
